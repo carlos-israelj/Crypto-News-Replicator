@@ -1,0 +1,42 @@
+# Configuración del proyecto
+
+# Scraper de X
+x_scraper:
+  username: "zuler"
+  max_tweets: 200
+  scroll_count: 20
+  headless: true
+  delay_between_scrolls: 2
+
+# Scraper de CoinMarketCap
+coinmarketcap:
+  base_url: "https://coinmarketcap.com/headlines/news/"
+  max_articles: 50
+  include_images: true
+
+# Modelo de personalidad
+model:
+  # Opciones: "openai", "anthropic", "local"
+  provider: "anthropic"
+  model_name: "claude-3-5-sonnet-20241022"
+  temperature: 0.7
+  max_tokens: 2000
+
+# API Keys (usar variables de entorno)
+api_keys:
+  openai_key: "${OPENAI_API_KEY}"
+  anthropic_key: "${ANTHROPIC_API_KEY}"
+
+# Procesamiento de imágenes
+image_processing:
+  resize: true
+  max_width: 1200
+  max_height: 800
+  formats: ["jpg", "png", "webp"]
+
+# Paths
+paths:
+  data_dir: "data"
+  output_dir: "output"
+  models_dir: "models"
+  images_dir: "images"

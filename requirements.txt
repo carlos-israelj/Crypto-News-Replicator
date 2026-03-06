@@ -1,0 +1,29 @@
+# Web Scraping
+selenium==4.16.0
+beautifulsoup4==4.12.2
+requests==2.31.0
+lxml==4.9.3
+playwright==1.40.0
+
+# Data Processing
+pandas==2.1.4
+numpy==1.26.2
+
+# AI/ML
+openai==1.6.1
+anthropic==0.8.1
+google-generativeai==0.3.2
+transformers==4.36.2
+torch==2.1.2
+
+# Image Processing
+Pillow==10.1.0
+opencv-python==4.8.1.78
+
+# Utilities
+python-dotenv==1.0.0
+tqdm==4.66.1
+pyyaml==6.0.1
+
+# Database (optional)
+sqlalchemy==2.0.23
