@@ -5,6 +5,9 @@
 frontend/.env.local
 frontend/.env
 
+# Claude Code documentation
+CLAUDE.md
+
 # Python
 __pycache__/
 *.py[cod]

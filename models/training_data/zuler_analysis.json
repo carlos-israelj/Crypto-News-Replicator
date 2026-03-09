@@ -1,0 +1,429 @@
+{
+  "username": "zuler",
+  "total_tweets": 10,
+  "original_tweets": 10,
+  "style_patterns": {
+    "emoji_usage": {
+      "percentage": 80.0,
+      "count": 8
+    },
+    "hashtag_usage": {
+      "percentage": 10.0,
+      "count": 1,
+      "most_common": [
+        [
+          "#Bitcoin",
+          1
+        ],
+        [
+          "#Crypto",
+          1
+        ]
+      ]
+    },
+    "mention_usage": {
+      "percentage": 0.0
+    },
+    "avg_tweet_length": 92.8,
+    "caps_usage": {
+      "total_caps_words": 12,
+      "common_caps_words": [
+        [
+          "$70K",
+          1
+        ],
+        [
+          "FOMO",
+          1
+        ],
+        [
+          "EIP-4844",
+          1
+        ],
+        [
+          "65K",
+          1
+        ],
+        [
+          "TPS",
+          1
+        ]
+      ]
+    },
+    "punctuation": {
+      "exclamation_marks": 1,
+      "question_marks": 1,
+      "avg_exclamations_per_tweet": 0.1
+    }
+  },
+  "vocabulary": {
+    "total_words": 148,
+    "unique_words": 87,
+    "most_common_words": [
+      [
+        "bitcoin",
+        3
+      ],
+      [
+        "los",
+        3
+      ],
+      [
+        "ethereum",
+        3
+      ],
+      [
+        "más",
+        3
+      ],
+      [
+        "fomo",
+        2
+      ],
+      [
+        "real",
+        2
+      ],
+      [
+        "ahora",
+        2
+      ],
+      [
+        "bueno",
+        2
+      ],
+      [
+        "sobre",
+        2
+      ],
+      [
+        "crypto",
+        2
+      ],
+      [
+        "layer",
+        2
+      ],
+      [
+        "superando",
+        1
+      ],
+      [
+        "otra",
+        1
+      ],
+      [
+        "vez",
+        1
+      ],
+      [
+        "halving",
+        1
+      ],
+      [
+        "está",
+        1
+      ],
+      [
+        "cerca",
+        1
+      ],
+      [
+        "merge",
+        1
+      ],
+      [
+        "fue",
+        1
+      ],
+      [
+        "solo",
+        1
+      ]
+    ],
+    "crypto_focus": {
+      "crypto_word_count": 10,
+      "percentage": 9.803921568627452
+    }
+  },
+  "topics": {
+    "crypto": {
+      "count": 8,
+      "percentage": 80.0
+    },
+    "trading": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "technology": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "finance": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "social": {
+      "count": 0,
+      "percentage": 0.0
+    }
+  },
+  "tone": {
+    "positive_sentiment": 4,
+    "negative_sentiment": 1,
+    "sentiment_ratio": 4.0,
+    "humor_percentage": 0.0
+  },
+  "structure": {
+    "thread_usage": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "link_usage": {
+      "count": 0,
+      "percentage": 0.0
+    },
+    "question_usage": {
+      "count": 1,
+      "percentage": 10.0
+    },
+    "visual_separators": 0
+  },
+  "engagement": {
+    "avg_likes": 0.0,
+    "avg_retweets": 0.0,
+    "avg_replies": 0.0,
+    "max_likes": 0,
+    "max_retweets": 0
+  },
+  "examples": [
+    {
+      "text": "Bitcoin superando los $70K otra vez 🚀 El halving está cerca y el FOMO es real",
+      "likes": 0,
+      "retweets": 0,
+      "timestamp": "2026-03-07T10:30:00"
+    },
+    {
+      "text": "Ethereum merge fue solo el comienzo. Ahora viene lo bueno con EIP-4844 💎",
+      "likes": 0,
+      "retweets": 0,
+      "timestamp": "2026-03-07T08:15:00"
+    },
+    {
+      "text": "Si no entiendes DeFi todavía, estás dejando dinero sobre la mesa. Thread sobre los mejores protocolos 🧵👇",
+      "likes": 0,
+      "retweets": 0,
+      "timestamp": "2026-03-06T14:20:00"
+    },
+    {
+      "text": "El problema con la mayoría de NFTs es que no tienen utilidad real. Cambia mi mente.",
+      "likes": 0,
+      "retweets": 0,
+      "timestamp": "2026-03-06T11:00:00"
+    },
+    {
+      "text": "Solana procesando 65K TPS mientras Ethereum hace... 15? La verdad duele pero alguien tiene que decirlo 💀",
+      "likes": 0,
+      "retweets": 0,
+      "timestamp": "2026-03-05T16:45:00"
+    }
+  ],
+  "content_type": {
+    "informative": {
+      "keywords": [
+        "según",
+        "reporta",
+        "anuncia",
+        "confirma",
+        "informa",
+        "according",
+        "reports",
+        "announces",
+        "confirms",
+        "breaking"
+      ],
+      "count": 0,
+      "percentage": 0.0
+    },
+    "opinion": {
+      "keywords": [
+        "creo",
+        "pienso",
+        "considero",
+        "mi opinión",
+        "personalmente",
+        "i think",
+        "i believe",
+        "in my opinion",
+        "personally",
+        "imo"
+      ],
+      "count": 0,
+      "percentage": 0.0
+    },
+    "prediction": {
+      "keywords": [
+        "predicción",
+        "espero",
+        "llegará",
+        "alcanzará",
+        "veremos",
+        "prediction",
+        "expect",
+        "will reach",
+        "will hit",
+        "we'll see"
+      ],
+      "count": 1,
+      "percentage": 10.0
+    },
+    "educational": {
+      "keywords": [
+        "cómo",
+        "qué es",
+        "explicación",
+        "guía",
+        "tutorial",
+        "how to",
+        "what is",
+        "explanation",
+        "guide",
+        "tutorial"
+      ],
+      "count": 0,
+      "percentage": 0.0
+    },
+    "analysis": {
+      "keywords": [
+        "análisis",
+        "porque",
+        "razón",
+        "debido a",
+        "factor",
+        "analysis",
+        "because",
+        "reason",
+        "due to",
+        "factor"
+      ],
+      "count": 0,
+      "percentage": 0.0
+    }
+  },
+  "linguistic_register": {
+    "formal_score": 0,
+    "casual_score": 0,
+    "register_type": "casual",
+    "formality_ratio": 0,
+    "uses_contractions": false,
+    "contraction_frequency": 0.0
+  },
+  "narrative_style": {
+    "first_person_usage": {
+      "count": 2,
+      "percentage": 14.285714285714285
+    },
+    "second_person_usage": {
+      "count": 6,
+      "percentage": 42.857142857142854
+    },
+    "third_person_usage": {
+      "count": 6,
+      "percentage": 42.857142857142854
+    },
+    "dominant_style": "second_person"
+  },
+  "opening_patterns": {
+    "patterns": {
+      "question": {
+        "count": 0,
+        "percentage": 0.0
+      },
+      "number": {
+        "count": 0,
+        "percentage": 0.0
+      },
+      "emoji": {
+        "count": 0,
+        "percentage": 0.0
+      },
+      "exclamation": {
+        "count": 0,
+        "percentage": 0.0
+      },
+      "statement": {
+        "count": 10,
+        "percentage": 100.0
+      }
+    },
+    "common_first_words": [
+      [
+        "bitcoin",
+        1
+      ],
+      [
+        "ethereum",
+        1
+      ],
+      [
+        "solana",
+        1
+      ],
+      [
+        "compré",
+        1
+      ],
+      [
+        "hot",
+        1
+      ],
+      [
+        "predicción:",
+        1
+      ]
+    ],
+    "dominant_opening": "statement"
+  },
+  "closing_patterns": {
+    "patterns": {
+      "emoji": {
+        "count": 0,
+        "percentage": 0.0
+      },
+      "question": {
+        "count": 0,
+        "percentage": 0.0
+      },
+      "exclamation": {
+        "count": 0,
+        "percentage": 0.0
+      },
+      "period": {
+        "count": 1,
+        "percentage": 10.0
+      },
+      "ellipsis": {
+        "count": 0,
+        "percentage": 0.0
+      },
+      "call_to_action": {
+        "count": 1,
+        "percentage": 10.0
+      }
+    },
+    "dominant_closing": "period"
+  },
+  "data_usage": {
+    "uses_numbers": true,
+    "number_frequency": 60.0,
+    "percentage_usage": 0.0,
+    "price_mentions": 30.0,
+    "data_heavy": true,
+    "total_numbers_used": 9
+  },
+  "sentence_patterns": {
+    "avg_sentence_length_words": 7.1,
+    "sentence_complexity": "complex",
+    "simple_vs_complex_ratio": 0.42857142857142855
+  }
+}

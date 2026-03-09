@@ -13,8 +13,9 @@ numpy==1.26.2
 openai==1.6.1
 anthropic==0.8.1
 google-generativeai==0.3.2
-transformers==4.36.2
-torch==2.1.2
+# transformers y torch son opcionales (no necesarios para el proyecto básico)
+# transformers==4.36.2
+# torch==2.1.2
 
 # Image Processing
 Pillow==10.1.0

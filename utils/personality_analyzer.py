@@ -43,7 +43,7 @@ class PersonalityAnalyzer:
         original_tweets = [t for t in self.tweets if not t.get('is_retweet', False)]
         print(f"Tweets originales: {len(original_tweets)}")
 
-        # Diferentes análisis
+        # Diferentes análisis - MUCHO MÁS DETALLADOS
         self.analysis = {
             'username': self.username,
             'total_tweets': len(self.tweets),
@@ -54,7 +54,15 @@ class PersonalityAnalyzer:
             'tone': self._analyze_tone(original_tweets),
             'structure': self._analyze_structure(original_tweets),
             'engagement': self._analyze_engagement(original_tweets),
-            'examples': self._get_top_tweets(original_tweets)
+            'examples': self._get_top_tweets(original_tweets),
+            # NUEVOS ANÁLISIS MÁS ESPECÍFICOS
+            'content_type': self._analyze_content_type(original_tweets),
+            'linguistic_register': self._analyze_linguistic_register(original_tweets),
+            'narrative_style': self._analyze_narrative_style(original_tweets),
+            'opening_patterns': self._analyze_opening_patterns(original_tweets),
+            'closing_patterns': self._analyze_closing_patterns(original_tweets),
+            'data_usage': self._analyze_data_usage(original_tweets),
+            'sentence_patterns': self._analyze_sentence_patterns(original_tweets)
         }
 
         return self.analysis
@@ -277,6 +285,303 @@ class PersonalityAnalyzer:
             }
             for t in sorted_tweets[:n]
         ]
+
+    def _analyze_content_type(self, tweets: List[Dict]) -> Dict:
+        """Analiza el TIPO de contenido que publica"""
+        texts = [t['text'].lower() for t in tweets]
+
+        # Patrones para diferentes tipos de contenido
+        types = {
+            'informative': {
+                'keywords': ['según', 'reporta', 'anuncia', 'confirma', 'informa',
+                           'according', 'reports', 'announces', 'confirms', 'breaking'],
+                'count': 0
+            },
+            'opinion': {
+                'keywords': ['creo', 'pienso', 'considero', 'mi opinión', 'personalmente',
+                           'i think', 'i believe', 'in my opinion', 'personally', 'imo'],
+                'count': 0
+            },
+            'prediction': {
+                'keywords': ['predicción', 'espero', 'llegará', 'alcanzará', 'veremos',
+                           'prediction', 'expect', 'will reach', 'will hit', "we'll see"],
+                'count': 0
+            },
+            'educational': {
+                'keywords': ['cómo', 'qué es', 'explicación', 'guía', 'tutorial',
+                           'how to', 'what is', 'explanation', 'guide', 'tutorial'],
+                'count': 0
+            },
+            'analysis': {
+                'keywords': ['análisis', 'porque', 'razón', 'debido a', 'factor',
+                           'analysis', 'because', 'reason', 'due to', 'factor'],
+                'count': 0
+            }
+        }
+
+        for text in texts:
+            for content_type, data in types.items():
+                if any(keyword in text for keyword in data['keywords']):
+                    types[content_type]['count'] += 1
+
+        # Calcular porcentajes
+        total = len(tweets)
+        for content_type in types:
+            types[content_type]['percentage'] = (types[content_type]['count'] / total * 100) if total > 0 else 0
+
+        return types
+
+    def _analyze_linguistic_register(self, tweets: List[Dict]) -> Dict:
+        """Analiza el registro lingüístico (formal vs casual vs coloquial)"""
+        texts = [t['text'] for t in tweets]
+
+        # Indicadores de registro formal
+        formal_indicators = ['mediante', 'asimismo', 'no obstante', 'por consiguiente',
+                           'however', 'therefore', 'furthermore', 'consequently']
+
+        # Indicadores de registro casual/coloquial
+        casual_indicators = ['jaja', 'lol', 'bro', 'vibes', 'lit', 'ngl', 'tbh',
+                           'tipo', 'osea', 'we', 'pana']
+
+        # Contracciones (más casual)
+        contractions = ["'ll", "'re", "'ve", "'d", "n't", "gonna", "wanna"]
+
+        formal_count = sum(
+            sum(1 for ind in formal_indicators if ind in text.lower())
+            for text in texts
+        )
+
+        casual_count = sum(
+            sum(1 for ind in casual_indicators if ind in text.lower())
+            for text in texts
+        )
+
+        contraction_count = sum(
+            sum(1 for cont in contractions if cont in text)
+            for text in texts
+        )
+
+        total_words = sum(len(text.split()) for text in texts)
+
+        return {
+            'formal_score': formal_count,
+            'casual_score': casual_count + contraction_count,
+            'register_type': 'formal' if formal_count > casual_count else 'casual',
+            'formality_ratio': formal_count / casual_count if casual_count > 0 else formal_count,
+            'uses_contractions': contraction_count > 0,
+            'contraction_frequency': (contraction_count / total_words * 100) if total_words > 0 else 0
+        }
+
+    def _analyze_narrative_style(self, tweets: List[Dict]) -> Dict:
+        """Analiza el estilo narrativo (primera persona, tercera, imperativo)"""
+        texts = [t['text'].lower() for t in tweets]
+
+        # Primera persona
+        first_person = ['yo', 'mi', 'mis', 'me', 'conmigo', 'i', 'my', 'me', 'mine']
+        first_person_count = sum(
+            sum(1 for word in first_person if f' {word} ' in f' {text} ')
+            for text in texts
+        )
+
+        # Segunda persona / Imperativo (habla directamente al lector)
+        second_person = ['tú', 'tu', 'te', 'contigo', 'you', 'your', 'yourself']
+        imperative_markers = ['no olvides', 'recuerda', 'mira', "don't forget", 'remember', 'check', 'watch']
+        second_person_count = sum(
+            sum(1 for word in second_person + imperative_markers if word in text)
+            for text in texts
+        )
+
+        # Tercera persona / objetivo
+        third_person_markers = ['el precio', 'bitcoin', 'ethereum', 'el mercado',
+                               'the price', 'the market', 'analysts', 'reports']
+        third_person_count = sum(
+            sum(1 for marker in third_person_markers if marker in text)
+            for text in texts
+        )
+
+        total = first_person_count + second_person_count + third_person_count
+
+        return {
+            'first_person_usage': {
+                'count': first_person_count,
+                'percentage': (first_person_count / total * 100) if total > 0 else 0
+            },
+            'second_person_usage': {
+                'count': second_person_count,
+                'percentage': (second_person_count / total * 100) if total > 0 else 0
+            },
+            'third_person_usage': {
+                'count': third_person_count,
+                'percentage': (third_person_count / total * 100) if total > 0 else 0
+            },
+            'dominant_style': max(
+                [('first_person', first_person_count),
+                 ('second_person', second_person_count),
+                 ('third_person', third_person_count)],
+                key=lambda x: x[1]
+            )[0]
+        }
+
+    def _analyze_opening_patterns(self, tweets: List[Dict]) -> Dict:
+        """Analiza cómo empieza típicamente los mensajes"""
+        texts = [t['text'] for t in tweets]
+
+        opening_words = []
+        opening_patterns = {
+            'question': 0,  # Empieza con pregunta
+            'number': 0,    # Empieza con número
+            'emoji': 0,     # Empieza con emoji
+            'exclamation': 0,  # Empieza con exclamación
+            'statement': 0   # Declaración directa
+        }
+
+        emoji_pattern = re.compile(
+            "["
+            "\U0001F600-\U0001F64F"
+            "\U0001F300-\U0001F5FF"
+            "\U0001F680-\U0001F6FF"
+            "\U0001F1E0-\U0001F1FF"
+            "\U00002702-\U000027B0"
+            "\U000024C2-\U0001F251"
+            "]+", flags=re.UNICODE
+        )
+
+        for text in texts:
+            first_word = text.split()[0] if text.split() else ''
+            opening_words.append(first_word.lower().strip('.,!?'))
+
+            # Clasificar tipo de apertura
+            if text.strip().startswith('?') or any(text.lower().startswith(q) for q in ['qué', 'cómo', 'cuándo', 'what', 'how', 'when', 'why', 'where']):
+                opening_patterns['question'] += 1
+            elif text[0].isdigit():
+                opening_patterns['number'] += 1
+            elif emoji_pattern.match(text):
+                opening_patterns['emoji'] += 1
+            elif text.startswith('!') or text.lower().startswith(('wow', 'omg', 'breaking')):
+                opening_patterns['exclamation'] += 1
+            else:
+                opening_patterns['statement'] += 1
+
+        # Palabras más comunes para empezar
+        opening_words_clean = [w for w in opening_words if len(w) > 2]
+        common_openings = Counter(opening_words_clean).most_common(10)
+
+        total = len(tweets)
+        for pattern in opening_patterns:
+            opening_patterns[pattern] = {
+                'count': opening_patterns[pattern],
+                'percentage': (opening_patterns[pattern] / total * 100) if total > 0 else 0
+            }
+
+        return {
+            'patterns': opening_patterns,
+            'common_first_words': common_openings,
+            'dominant_opening': max(opening_patterns.items(), key=lambda x: x[1]['count'])[0]
+        }
+
+    def _analyze_closing_patterns(self, tweets: List[Dict]) -> Dict:
+        """Analiza cómo termina típicamente los mensajes"""
+        texts = [t['text'] for t in tweets]
+
+        closing_patterns = {
+            'emoji': 0,
+            'question': 0,
+            'exclamation': 0,
+            'period': 0,
+            'ellipsis': 0,
+            'call_to_action': 0
+        }
+
+        cta_markers = ['screenshot', 'rt', 'share', 'follow', 'check', 'link', 'comparte', 'sígueme']
+
+        for text in texts:
+            text_end = text.strip()[-20:] if len(text) > 20 else text.strip()
+
+            if text.strip().endswith(('?', '¿')):
+                closing_patterns['question'] += 1
+            elif text.strip().endswith(('!', '¡')):
+                closing_patterns['exclamation'] += 1
+            elif text.strip().endswith('...'):
+                closing_patterns['ellipsis'] += 1
+            elif text.strip().endswith('.'):
+                closing_patterns['period'] += 1
+
+            if any(cta in text_end.lower() for cta in cta_markers):
+                closing_patterns['call_to_action'] += 1
+
+        total = len(tweets)
+        for pattern in closing_patterns:
+            closing_patterns[pattern] = {
+                'count': closing_patterns[pattern],
+                'percentage': (closing_patterns[pattern] / total * 100) if total > 0 else 0
+            }
+
+        return {
+            'patterns': closing_patterns,
+            'dominant_closing': max(closing_patterns.items(), key=lambda x: x[1]['count'])[0]
+        }
+
+    def _analyze_data_usage(self, tweets: List[Dict]) -> Dict:
+        """Analiza uso de números, estadísticas y datos"""
+        texts = [t['text'] for t in tweets]
+
+        # Números y estadísticas
+        number_pattern = re.compile(r'\d+')
+        percentage_pattern = re.compile(r'\d+%')
+        price_pattern = re.compile(r'\$\d+')
+
+        tweets_with_numbers = sum(1 for text in texts if number_pattern.search(text))
+        tweets_with_percentages = sum(1 for text in texts if percentage_pattern.search(text))
+        tweets_with_prices = sum(1 for text in texts if price_pattern.search(text))
+
+        # Extraer todos los números
+        all_numbers = []
+        for text in texts:
+            all_numbers.extend(number_pattern.findall(text))
+
+        total = len(tweets)
+
+        return {
+            'uses_numbers': tweets_with_numbers > 0,
+            'number_frequency': (tweets_with_numbers / total * 100) if total > 0 else 0,
+            'percentage_usage': (tweets_with_percentages / total * 100) if total > 0 else 0,
+            'price_mentions': (tweets_with_prices / total * 100) if total > 0 else 0,
+            'data_heavy': tweets_with_numbers / total > 0.5 if total > 0 else False,
+            'total_numbers_used': len(all_numbers)
+        }
+
+    def _analyze_sentence_patterns(self, tweets: List[Dict]) -> Dict:
+        """Analiza patrones de estructura de oraciones"""
+        texts = [t['text'] for t in tweets]
+
+        sentence_lengths = []
+        for text in texts:
+            # Dividir en oraciones aproximadamente
+            sentences = re.split(r'[.!?]+', text)
+            sentences = [s.strip() for s in sentences if s.strip()]
+            sentence_lengths.extend([len(s.split()) for s in sentences])
+
+        avg_sentence_length = sum(sentence_lengths) / len(sentence_lengths) if sentence_lengths else 0
+
+        # Complejidad de oraciones
+        complex_markers = [',', ';', ':', 'que', 'porque', 'mientras', 'aunque',
+                          'which', 'that', 'because', 'while', 'although']
+
+        simple_sentences = 0
+        complex_sentences = 0
+
+        for text in texts:
+            has_complex_marker = any(marker in text.lower() for marker in complex_markers)
+            if has_complex_marker:
+                complex_sentences += 1
+            else:
+                simple_sentences += 1
+
+        return {
+            'avg_sentence_length_words': round(avg_sentence_length, 1),
+            'sentence_complexity': 'complex' if complex_sentences > simple_sentences else 'simple',
+            'simple_vs_complex_ratio': simple_sentences / complex_sentences if complex_sentences > 0 else simple_sentences
+        }
 
     def save_analysis(self, output_path=None):
         """Guarda el análisis en un archivo JSON"""
